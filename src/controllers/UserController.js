@@ -5,7 +5,9 @@ class UserController {
   async store(req, res) {
     try {
       const novoUser = await User.create(req.body);
-      return res.json(novoUser);
+      const { id, nome, email } = novoUser;
+      // return res.json(novoUser);
+      return res.json({ id, nome, email });
     } catch (e) {
       return res.status(400).json({
         errors: e.errors.map((err) => err.message),
@@ -17,7 +19,7 @@ class UserController {
   async index(req, res) {
     try {
       // const users = await User.findAll();
-      const users = await User.findAll({ attributes: ['id', 'nome', 'email'] });
+      const users = await User.findAll({ attributes: ['id', 'nome', 'email', 'updated_at'] });
       return res.json(users);
     } catch (e) {
       return res.json(null);
@@ -42,9 +44,9 @@ class UserController {
       }
 
       const { id, nome, email } = user;
+      return res.json({ id, nome, email });
 
       // return res.json(user);
-      return res.json({ id, nome, email });
     } catch (e) {
       return res.json(null);
     }
@@ -62,7 +64,8 @@ class UserController {
       }
 
       const novosdados = await user.update(req.body);
-      return res.json(novosdados);
+      const { id, nome, email } = novosdados;
+      return res.json({ id, nome, email });
     } catch (e) {
       return res.json(null);
     }
