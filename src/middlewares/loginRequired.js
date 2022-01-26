@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import UserController from '../controllers/UserController';
 import User from '../models/User';
 
 export default async (req, res, next) => {
@@ -19,8 +18,10 @@ export default async (req, res, next) => {
     // Caso o usuário seja deletado, ou faça Update de campos chave (não pode!!!),
     // Até o usuário realizar o logoff, ele continuará com o dasdos válidos.
     // verifica no banco, a cada requisição< se as informações do usuário são válidas.
-    // Na minha opnião, não usar, pois perde o sentido usar o JWT se teremos que ir ao banco a cada requisição.
-    // Não permitir a ediução de dos chaves. Não permitir a exclusão do cadastro do usuário. Apenas inativar.
+    // Na minha opnião, não usar,
+    // pois perde o sentido usar o JWT se teremos que ir ao banco a cada requisição.
+    // Não permitir a ediução de dos chaves.
+    // Não permitir a exclusão do cadastro do usuário. Apenas inativar.
 
     const user = await User.findOne({
       where: {

@@ -1,4 +1,3 @@
-import res from 'express/lib/response';
 import User from '../models/User';
 
 class UserController {
